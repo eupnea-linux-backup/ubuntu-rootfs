@@ -7,7 +7,7 @@ from functions import *
 
 def process_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--version", dest="ubuntu_version", type=int, nargs=1, help="Set Ubuntu version to boostrap")
+    parser.add_argument("--version", dest="ubuntu_version", type=float, nargs=1, help="Set Ubuntu version to boostrap")
     return parser.parse_args()
 
 
