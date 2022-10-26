@@ -7,7 +7,7 @@ from functions import *
 
 def process_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--version", dest="ubuntu_version", type=float, nargs=1, help="Set Ubuntu version to boostrap")
+    parser.add_argument("--version", dest="ubuntu_version", type=str, nargs=1, help="Set Ubuntu version to boostrap")
     return parser.parse_args()
 
 
@@ -17,10 +17,10 @@ if __name__ == "__main__":
     ubuntu_version = args.ubuntu_version[0]
 
     versions_codenames = {
-        18.04: "bionic",
-        20.04: "focal",
-        22.04: "jammy",
-        22.10: "kinetic"
+        "18.04": "bionic",
+        "20.04": "focal",
+        "22.04": "jammy",
+        "22.10": "kinetic"
     }
 
     print_status("Making directory")
