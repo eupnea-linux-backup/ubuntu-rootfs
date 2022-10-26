@@ -17,7 +17,7 @@ if __name__ == "__main__":
     ubuntu_version = args.ubuntu_version[0]
 
     versions_codenames = {
-        18.04: "eoan",
+        18.04: "bionic",
         20.04: "focal",
         22.04: "jammy",
         22.10: "kinetic"
