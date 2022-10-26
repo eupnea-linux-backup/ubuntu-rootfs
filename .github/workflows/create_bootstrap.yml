@@ -1,0 +1,121 @@
+name: Bootstrapping + releasing ubuntu rootfs
+on:
+  push:
+    branches: [ "main" ]
+  schedule:
+    - cron: "10 0 * * *" # run at the start of every day after functions.py update
+  workflow_dispatch:
+
+jobs:
+  build-18.04:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checking out repository code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 1
+
+      - name: Installing dependencies
+        run: sudo apt-get install -y debootstrap curl
+
+      - name: Bootstrapping ubuntu 18.04
+        run: sudo python3 bootstrap_ubuntu.py --version=18.04
+
+      - name: Uploading rootfs as artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: ubuntu-18.04
+          retention-days: 1
+          path: |
+            /tmp/ubuntu-rootfs-18.04.tar.xz
+
+  build-20.04:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checking out repository code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 1
+
+      - name: Installing dependencies
+        run: sudo apt-get install -y debootstrap curl
+
+      - name: Bootstrapping ubuntu 20.04
+        run: sudo python3 bootstrap_ubuntu.py --version=20.04
+
+      - name: Uploading rootfs as artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: ubuntu-20.04
+          retention-days: 1
+          path: |
+            /tmp/ubuntu-rootfs-20.04.tar.xz
+
+  build-22.04:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checking out repository code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 1
+
+      - name: Installing dependencies
+        run: sudo apt-get install -y debootstrap curl
+
+      - name: Bootstrapping ubuntu 22.04
+        run: sudo python3 bootstrap_ubuntu.py --version=22.04
+
+      - name: Uploading rootfs as artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: ubuntu-22.04
+          retention-days: 1
+          path: |
+            /tmp/ubuntu-rootfs-22.04.tar.xz
+
+  build-22.10:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checking out repository code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 1
+
+      - name: Installing dependencies
+        run: sudo apt-get install -y debootstrap curl
+
+      - name: Bootstrapping ubuntu 22.10
+        run: sudo python3 bootstrap_ubuntu.py --version=22.10
+
+      - name: Uploading rootfs as artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: ubuntu-22.10
+          retention-days: 1
+          path: |
+            /tmp/ubuntu-rootfs-22.10.tar.xz
+
+  create-release:
+    runs-on: ubuntu-22.04
+    needs: [ build-18.04, build-20.04, build-22.04, build-22.10 ]
+    steps:
+      - name: Downloading rootfs artifacts
+        uses: actions/download-artifact@v3
+        with:
+          path: /tmp/artifacts/
+
+      - name: Generating release tag
+        id: tag
+        run: |
+          echo "::set-output name=release_tag::$(date +"%Y.%m.%d_%H-%M")"
+
+      - name: Creating new release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ steps.tag.outputs.release_tag }}
+          name: Automated Ubuntu rootfs build - ${{ steps.tag.outputs.release_tag }}
+          body: |
+            These are completely **unmodified** ubuntu rootfs images for the depthboot builder script.  
+            Please download official isos at https://ubuntu.com/download/
+          files: |
+            /tmp/artifacts/ubuntu-*/ubuntu-rootfs-*
