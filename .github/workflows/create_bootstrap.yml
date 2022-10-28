@@ -7,50 +7,6 @@ on:
   workflow_dispatch:
 
 jobs:
-  build_18-04:
-    runs-on: ubuntu-22.04
-    steps:
-      - name: Checking out repository code
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 1
-
-      - name: Installing dependencies
-        run: sudo apt-get install -y debootstrap curl
-
-      - name: Bootstrapping ubuntu 18.04
-        run: sudo python3 bootstrap_ubuntu.py --version=18.04
-
-      - name: Uploading rootfs as artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: ubuntu-18.04
-          retention-days: 1
-          path: |
-            /tmp/ubuntu-rootfs-18.04.tar.xz
-
-  build_20-04:
-    runs-on: ubuntu-22.04
-    steps:
-      - name: Checking out repository code
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 1
-
-      - name: Installing dependencies
-        run: sudo apt-get install -y debootstrap curl
-
-      - name: Bootstrapping ubuntu 20.04
-        run: sudo python3 bootstrap_ubuntu.py --version=20.04
-
-      - name: Uploading rootfs as artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: ubuntu-20.04
-          retention-days: 1
-          path: |
-            /tmp/ubuntu-rootfs-20.04.tar.xz
-
   build_22-04:
     runs-on: ubuntu-22.04
     steps:
