@@ -16,7 +16,7 @@ jobs:
           fetch-depth: 1
 
       - name: Installing dependencies
-        run: sudo apt-get install -y debootstrap curl
+        run: sudo apt-get update && sudo apt-get install -y debootstrap curl
 
       - name: Bootstrapping ubuntu 22.04
         run: sudo python3 bootstrap_ubuntu.py --version=22.04
