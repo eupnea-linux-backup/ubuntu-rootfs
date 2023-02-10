@@ -28,6 +28,7 @@ jobs:
           retention-days: 1
           path: |
             /tmp/ubuntu-rootfs-22.04.tar.xz
+            /tmp/ubuntu-rootfs-22.04.sha256
 
   build_22-10:
     runs-on: ubuntu-latest
@@ -50,6 +51,7 @@ jobs:
           retention-days: 1
           path: |
             /tmp/ubuntu-rootfs-22.10.tar.xz
+            /tmp/ubuntu-rootfs-22.10.sha256
 
   create-release:
     runs-on: ubuntu-latest
