@@ -31,3 +31,6 @@ if __name__ == "__main__":
     print_status("Compressing rootfs")
     os.chdir(f"/tmp/{ubuntu_version}")
     bash(f"tar -cv -I 'xz -9 -T0' -f ../ubuntu-rootfs-{ubuntu_version}.tar.xz ./")
+
+    print_status("Calculating checksum")
+    bash(f"sha256sum ../ubuntu-rootfs-{ubuntu_version}.tar.xz > ../ubuntu-rootfs-{ubuntu_version}.sha256")
