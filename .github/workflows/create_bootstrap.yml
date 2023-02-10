@@ -8,7 +8,7 @@ on:
 
 jobs:
   build_22-04:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     steps:
       - name: Checking out repository code
         uses: actions/checkout@v3
@@ -30,7 +30,7 @@ jobs:
             /tmp/ubuntu-rootfs-22.04.tar.xz
 
   build_22-10:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     steps:
       - name: Checking out repository code
         uses: actions/checkout@v3
@@ -52,7 +52,7 @@ jobs:
             /tmp/ubuntu-rootfs-22.10.tar.xz
 
   create-release:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     needs: [ build_22-04, build_22-10 ]
     steps:
       - name: Downloading rootfs artifacts
