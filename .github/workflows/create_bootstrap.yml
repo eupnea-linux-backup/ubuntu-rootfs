@@ -3,7 +3,7 @@ on:
   push:
     branches: [ "main" ]
   schedule:
-    - cron: "10 0 * * *" # run at the start of every day after functions.py update
+    - cron: "0 0 * * *" # run at the start of every day
   workflow_dispatch:
 
 jobs:
@@ -16,10 +16,10 @@ jobs:
           fetch-depth: 1
 
       - name: Installing dependencies
-        run: sudo apt-get update && sudo apt-get install -y debootstrap curl
+        run: sudo apt-get update && sudo apt-get install -y debootstrap
 
       - name: Bootstrapping ubuntu 22.04
-        run: sudo python3 bootstrap_ubuntu.py --version=22.04
+        run: sudo bash bootstrap_ubuntu.sh 22.04 jammy
 
       - name: Uploading rootfs as artifact
         uses: actions/upload-artifact@v2
@@ -39,10 +39,10 @@ jobs:
           fetch-depth: 1
 
       - name: Installing dependencies
-        run: sudo apt-get update && sudo apt-get install -y debootstrap curl
+        run: sudo apt-get update && sudo apt-get install -y debootstrap
 
       - name: Bootstrapping ubuntu 22.10
-        run: sudo python3 bootstrap_ubuntu.py --version=22.10
+        run: sudo bash bootstrap_ubuntu.sh 22.10 kinetic
 
       - name: Uploading rootfs as artifact
         uses: actions/upload-artifact@v2
