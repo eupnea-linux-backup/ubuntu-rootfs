@@ -22,9 +22,6 @@ mkdir -p "/tmp/$1"
 echo "Bootstrapping Ubuntu $1 $2"
 debootstrap --components=main,restricted,universe,multiverse "$2" /tmp/"$1" http://archive.ubuntu.com/ubuntu
 
-echo "Updating all packages inside rootfs"
-chroot /tmp/"$1" /bin/bash -c "apt update -y && apt upgrade -y"
-
 echo "Cleaning rootfs"
 # Remove unneeded/temporary files to reduce the rootfs size
 rm -rf /tmp/"$1"/boot/*
