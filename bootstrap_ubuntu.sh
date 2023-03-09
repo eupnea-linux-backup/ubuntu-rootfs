@@ -25,13 +25,13 @@ debootstrap --components=main,restricted,universe,multiverse "$2" /tmp/"$1" http
 echo "Cleaning rootfs"
 # Remove unneeded/temporary files to reduce the rootfs size
 rm -rf /tmp/"$1"/boot/*
-rm -rf /tmp/"$1"/dev/*
+#rm -rf /tmp/"$1"/dev/*
 rm -rf /tmp/"$1"/lost+found/*
 rm -rf /tmp/"$1"/media/*
 rm -rf /tmp/"$1"/mnt/*
-rm -rf /tmp/"$1"/proc/*
-rm -rf /tmp/"$1"/run/*
-rm -rf /tmp/"$1"/sys/*
+#rm -rf /tmp/"$1"/proc/*
+#rm -rf /tmp/"$1"/run/*
+#rm -rf /tmp/"$1"/sys/*
 rm -rf /tmp/"$1"/tmp/*
 rm -rf /tmp/"$1"/var/tmp
 rm -rf /tmp/"$1"/var/cache
