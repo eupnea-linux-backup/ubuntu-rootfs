@@ -5,14 +5,14 @@ set -e
 if [ -z "$1" ]; then
   echo "No version provided"
   echo "Usage: bootstrap_ubuntu.sh <version> <codename>"
-  echo "Supported versions: 22.04, 22.10"
+  echo "For example: bootstrap_ubuntu.sh 22.04 jammy"
   exit 1
 fi
 
 if [ -z "$2" ]; then
   echo "No codename provided"
   echo "Usage: bootstrap_ubuntu.sh <version> <codename>"
-  echo "Supported codenames: jammy, kinetic"
+  echo "For example: bootstrap_ubuntu.sh 22.04 jammy"
   exit 1
 fi
 
