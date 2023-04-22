@@ -14,9 +14,9 @@ jobs:
         codename: ["jammy", "lunar"]
         exclude: 
           - version: 22.04
-            codename: jammy
-          - version: 23.04
             codename: lunar
+          - version: 23.04
+            codename: jammy
     runs-on: ubuntu-latest
     steps:
       - name: Checking out repository code
