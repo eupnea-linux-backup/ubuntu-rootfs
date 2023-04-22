@@ -10,12 +10,12 @@ jobs:
   bootstrap-rootfs:
     strategy:
       matrix:
-        version: [ "22.04", "22.10" ]
-        codename: ["jammy", "kinetic"]
+        version: [ "22.04", "23.04" ]
+        codename: ["jammy", "lunar"]
         exclude: 
           - version: 22.04
-            codename: kinetic
-          - version: 22.10
+            codename: lunar
+          - version: 23.04
             codename: jammy
     runs-on: ubuntu-latest
     steps:
