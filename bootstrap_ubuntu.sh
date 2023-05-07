@@ -41,4 +41,6 @@ cd "/tmp/$1"
 tar -cv -I 'xz -9 -T0' -f ../ubuntu-rootfs-"$1".tar.xz ./
 
 echo "Calculating sha256sum"
-sha256sum ../ubuntu-rootfs-"$1".tar.xz >../ubuntu-rootfs-"$1".sha256
+# go to where the rootfs is. Using ../ results in broken sha256sum checkfiles
+cd ..
+sha256sum ubuntu-rootfs-"$1".tar.xz >ubuntu-rootfs-"$1".sha256
