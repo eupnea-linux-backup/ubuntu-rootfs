@@ -10,8 +10,8 @@ jobs:
   bootstrap-rootfs:
     strategy:
       matrix:
-        version: [ "22.04", "23.04" ]
-        codename: ["jammy", "lunar"]
+        version: [ "22.04", "23.10" ]
+        codename: ["jammy", "mantic"]
         exclude: 
           - version: 22.04
             codename: lunar
@@ -58,7 +58,7 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           tag_name: ${{ steps.tag.outputs.release_tag }}
-          name: Automated Ubuntu rootfs build - ${{ steps.tag.outputs.release_tag }}
+          name: Automated Ubuntu RootFS build - ${{ steps.tag.outputs.release_tag }}
           body: |
             These are completely **unmodified** ubuntu rootfs images for the depthboot builder script.  
             Please download official isos at https://ubuntu.com/download/
